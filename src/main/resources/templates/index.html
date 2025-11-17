@@ -11,7 +11,6 @@
             background-color: #f4f6f8;
         }
 
-        /* Navbar */
         .navbar-brand {
             font-weight: bold;
             font-size: 1.4rem;
@@ -32,7 +31,6 @@
             color: #0d6efd;
         }
 
-        /* Header */
         #about h1 {
             font-size: 2.2rem;
             color: #0d6efd;
@@ -57,7 +55,6 @@
             color: #fff;
         }
 
-        /* Skill Buttons */
         .skill-btn {
             margin: 5px;
         }
@@ -130,8 +127,8 @@
 <div class="container mt-5" id="about">
     <h1>Hi, I'm Anil 👋</h1>
     <p>
-        DevOps & Cloud Engineer (Trainee) skilled in CI/CD, Docker, Kubernetes, Terraform, AWS, and Azure.
-        Passionate about scalable deployments and automation.
+        DevOps & Cloud Engineer (Trainee) skilled in CI/CD, Docker, Kubernetes, Terraform, AWS, Azure, GitOps, and Cloud Automation.
+        Passionate about scalable deployments, automation, and building high-availability systems.
     </p>
     <a href="/files/resume.pdf" download class="btn btn-resume mt-3">Download My Resume</a>
 </div>
@@ -141,33 +138,32 @@
     <h3 class="section-title">Technical Skills</h3>
 
     <div class="mb-3">
-        <!-- Buttons -->
         <button class="btn btn-outline-primary skill-btn" onclick="showSkill('devops')">DevOps Tools</button>
         <button class="btn btn-outline-primary skill-btn" onclick="showSkill('cicd')">CI/CD</button>
         <button class="btn btn-outline-primary skill-btn" onclick="showSkill('cloud')">Cloud Platforms</button>
         <button class="btn btn-outline-primary skill-btn" onclick="showSkill('container')">Containerization</button>
         <button class="btn btn-outline-primary skill-btn" onclick="showSkill('monitoring')">Monitoring</button>
-        <button class="btn btn-outline-primary skill-btn" onclick="showSkill('build')">Build & Artifact</button>
-        <button class="btn btn-outline-primary skill-btn" onclick="showSkill('testing')">Testing & Automation</button>
+        <button class="btn btn-outline-primary skill-btn" onclick="showSkill('build')">Build & Quality</button>
+        <button class="btn btn-outline-primary skill-btn" onclick="showSkill('testing')">Testing</button>
         <button class="btn btn-outline-primary skill-btn" onclick="showSkill('os')">Operating Systems</button>
-        <button class="btn btn-outline-primary skill-btn" onclick="showSkill('scripting')">Scripting & Programming</button>
+        <button class="btn btn-outline-primary skill-btn" onclick="showSkill('scripting')">Scripting</button>
         <button class="btn btn-outline-primary skill-btn" onclick="showSkill('db')">Databases</button>
         <button class="btn btn-outline-primary skill-btn" onclick="showSkill('frontend')">Frontend</button>
         <button class="btn btn-outline-primary skill-btn" onclick="showSkill('additional')">Additional Skills</button>
     </div>
 
     <div id="skill-details-container">
-        <div id="devops" class="skill-details"><strong>DevOps Tools:</strong> Git, GitHub, Jenkins, Docker, Kubernetes, Ansible, Terraform</div>
-        <div id="cicd" class="skill-details"><strong>CI/CD:</strong> Jenkins Pipelines, GitHub Actions, Webhooks, Argo CD, Argo Image Updater</div>
-        <div id="cloud" class="skill-details"><strong>Cloud Platforms:</strong> AWS (EC2, S3, IAM, VPC, ECR, EKS), Azure (VMs, Storage, AKS, ACR)</div>
-        <div id="container" class="skill-details"><strong>Containerization & Orchestration:</strong> Docker, Docker Hub, AWS ECR, Azure ACR, Kubernetes (EKS/AKS)</div>
-        <div id="monitoring" class="skill-details"><strong>Monitoring & Logging:</strong> Prometheus, Grafana</div>
-        <div id="build" class="skill-details"><strong>Build & Artifact Management:</strong> Maven, JFrog</div>
-        <div id="testing" class="skill-details"><strong>Testing & Automation:</strong> SonarQube, JUnit, Selenium</div>
-        <div id="os" class="skill-details"><strong>Operating Systems:</strong> Linux Administration: User Management, File Permissions, Process & Disk Management, Networking</div>
-        <div id="scripting" class="skill-details"><strong>Scripting & Programming:</strong> Python, Bash, YAML, Shell Scripting</div>
+        <div id="devops" class="skill-details"><strong>DevOps Tools:</strong> Git, GitHub, GitLab, Jenkins, Docker, Kubernetes, Helm, Argo CD, Argo Image Updater, Nexus, Terraform, Ansible</div>
+        <div id="cicd" class="skill-details"><strong>CI/CD:</strong> Jenkins (Scripted/Declarative Pipelines), GitHub Actions, GitOps Deployments, Webhooks, Multi-Stage Automated Pipelines</div>
+        <div id="cloud" class="skill-details"><strong>Cloud Platforms:</strong> AWS (EC2, S3, IAM, VPC, ECR, ALB, Route 53, CloudWatch, EKS), Azure (VMs, VNets, AKS, ACR)</div>
+        <div id="container" class="skill-details"><strong>Containerization & Orchestration:</strong> Docker, Docker Compose, AWS ECR, Kubernetes (Minikube, Kubeadm, EKS)</div>
+        <div id="monitoring" class="skill-details"><strong>Monitoring & Logging:</strong> Prometheus, Grafana, Loki, CloudWatch Monitoring & Alerts</div>
+        <div id="build" class="skill-details"><strong>Build & Quality:</strong> Maven, Nexus Repository, SonarQube, JUnit</div>
+        <div id="testing" class="skill-details"><strong>Testing:</strong> pytest, flake8, black, Selenium Automation</div>
+        <div id="os" class="skill-details"><strong>Operating Systems:</strong> Ubuntu, Amazon Linux, Windows, Linux Administration</div>
+        <div id="scripting" class="skill-details"><strong>Scripting:</strong> Bash, Shell Scripting, Python, YAML</div>
         <div id="db" class="skill-details"><strong>Databases:</strong> MySQL, PostgreSQL</div>
-        <div id="frontend" class="skill-details"><strong>Frontend Development:</strong> HTML, CSS, JavaScript, Bootstrap</div>
+        <div id="frontend" class="skill-details"><strong>Frontend:</strong> HTML, CSS, JavaScript, Bootstrap</div>
         <div id="additional" class="skill-details"><strong>Additional Technical Expertise:</strong> Full Stack Java, PHP, Machine Learning, Data Structures & Algorithms (DSA)</div>
     </div>
 </div>
@@ -176,9 +172,25 @@
 <div class="container mt-5" id="projects">
     <h3 class="section-title">Projects</h3>
     <ul>
-        <li><strong>CI/CD Pipeline with Jenkins, Argo CD, Kubernetes:</strong> Built pipelines, GitHub integration, and AWS EKS deployment.</li>
-        <li><strong>Automated CI/CD with Jenkins, Docker, Terraform:</strong> Automated builds and deployments with AWS ECS/Fargate using Terraform.</li>
-        <li><strong>DevOps Project with SonarQube, Jenkins, and Monitoring:</strong> Integrated SonarQube, deployed apps via Argo CD, real-time monitoring with Grafana & Prometheus.</li>
+        <li><strong>Stage 1 – Static Website CI/CD using Jenkins:</strong> Implemented a full CI pipeline with GitHub Webhooks, automated deployments to AWS EC2.</li>
+
+        <li><strong>Stage 2 – Python Flask App CI/CD:</strong> Built pipelines using pip, pytest, black, flake8, Docker, and deployed containerized applications on EC2 using Jenkins.</li>
+
+        <li><strong>Stage 3 – Node.js Express App CI/CD:</strong> Developed an automated pipeline for Node.js including build, Docker image creation, and deployment on AWS.</li>
+
+        <li><strong>GitOps Deployment using Argo CD:</strong> Implemented continuous deployment with Argo CD, automatic rollouts, and image auto-updates using Argo Image Updater.</li>
+
+        <li><strong>Kubernetes Application Deployment:</strong> Setup Deployments, Services, Ingress, ConfigMaps, Secrets, and automated updates for workloads using GitOps.</li>
+
+        <li><strong>SonarQube Integration with Jenkins:</strong> Installed SonarQube on EC2, integrated with Jenkins for automated code analysis, enforced Quality Gates.</li>
+
+        <li><strong>Monitoring with Prometheus & Grafana:</strong> Built cloud-monitoring dashboards including node exporter, CPU/Memory alerts, and API metrics.</li>
+
+        <li><strong>Terraform AWS Infrastructure Automation:</strong> Provisioned EC2, VPC, Subnets, Security Groups, IAM using reusable Terraform modules.</li>
+
+        <li><strong>Microservices Deployment using Docker:</strong> Containerized applications, created Dockerfiles, optimized images, and deployed using Docker & Jenkins.</li>
+
+        <li><strong>GitHub + Jenkins Webhook Automation:</strong> Configured end-to-end trigger-based CI/CD pipelines using webhook integration.</li>
     </ul>
 </div>
 
@@ -188,9 +200,9 @@
     <p><strong>DevOps & Cloud Engineering Trainee | QEdge, Hyderabad, Telangana | Jul 2024 – Jan 2025</strong></p>
     <ul>
         <li>Completed intensive 6-month DevOps & Cloud training.</li>
-        <li>Designed and maintained CI/CD pipelines using Jenkins, GitHub Actions, Docker, Kubernetes.</li>
-        <li>Managed AWS & Azure cloud deployments and automated provisioning using Terraform & Ansible.</li>
-        <li>Integrated SonarQube, implemented monitoring, optimized pipelines, and ensured high availability.</li>
+        <li>Designed and maintained CI/CD pipelines using Jenkins, Docker, Kubernetes, and GitHub Actions.</li>
+        <li>Managed AWS & Azure deployments; automated provisioning using Terraform & Ansible.</li>
+        <li>Integrated SonarQube, implemented monitoring using Prometheus & Grafana, and optimized pipelines.</li>
     </ul>
 </div>
 
@@ -231,7 +243,9 @@
 
 <!-- Footer -->
 <footer>
-    <p>&copy; 2025 Anil Jagari | Hyderabad, Telangana | Email: <a href="mailto:aniljagari432@gmail.com">aniljagari432@gmail.com</a></p>
+    <p>&copy; 2025 Anil Jagari | Hyderabad, Telangana | Email:
+        <a href="mailto:aniljagari432@gmail.com">aniljagari432@gmail.com</a>
+    </p>
 </footer>
 
 <script src="/js/bootstrap.bundle.min.js"></script>
