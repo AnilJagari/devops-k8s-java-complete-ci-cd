@@ -1,0 +1,79 @@
+# 1. Update system packages
+sudo apt update && sudo apt upgrade -y        # Updates all system packages to latest versions
+
+# 2. Install essential tools
+sudo apt install -y unzip wget nano curl      # Installs unzip, wget, text editor, and curl
+
+# 3. Install Java 17 (required for SonarQube)
+sudo apt install -y openjdk-17-jdk
+java -version                                 # Verify Java installation
+
+# 4. Install PostgreSQL (SonarQube database)
+sudo apt install -y postgresql postgresql-contrib
+sudo systemctl enable postgresql              # Ensure PostgreSQL starts on boot
+sudo systemctl start postgresql               # Start PostgreSQL service
+sudo systemctl status postgresql              # Check PostgreSQL status
+
+# 5. Configure PostgreSQL for SonarQube
+sudo -u postgres psql
+# Inside PostgreSQL prompt:
+CREATE DATABASE sonarqube;                     # Create database for SonarQube
+CREATE USER sonar WITH ENCRYPTED PASSWORD 'sonar';   # Create database user
+GRANT ALL PRIVILEGES ON DATABASE sonarqube TO sonar; # Grant full privileges on DB
+\c sonarqube
+GRANT ALL PRIVILEGES ON SCHEMA public TO sonar;       # Grant privileges on public schema
+ALTER DEFAULT PRIVILEGES IN SCHEMA public GRANT ALL PRIVILEGES ON TABLES TO sonar; # Future tables
+\q
+
+# 6. Download and extract SonarQube
+cd /opt
+sudo wget https://binaries.sonarsource.com/Distribution/sonarqube/sonarqube-25.11.0.114957.zip
+sudo unzip sonarqube-25.11.0.114957.zip
+sudo mv sonarqube-25.11.0.114957 sonarqube
+sudo chown -R ubuntu:ubuntu /opt/sonarqube   # Replace 'ubuntu' with your user
+
+# 7. Configure SonarQube database connection
+sudo nano /opt/sonarqube/conf/sonar.properties
+# Add/update:
+# sonar.jdbc.username=sonar
+# sonar.jdbc.password=sonar
+# sonar.jdbc.url=jdbc:postgresql://localhost/sonarqube
+# sonar.search.javaOpts=-Xms128m -Xmx512m -XX:+HeapDumpOnOutOfMemoryError
+
+# 8. Create systemd service for SonarQube
+sudo nano /etc/systemd/system/sonarqube.service
+# Add:
+# [Unit]
+# Description=SonarQube service
+# After=syslog.target network.target postgresql.service
+#
+# [Service]
+# Type=forking
+# ExecStart=/opt/sonarqube/bin/linux-x86-64/sonar.sh start
+# ExecStop=/opt/sonarqube/bin/linux-x86-64/sonar.sh stop
+# User=ubuntu
+# Group=ubuntu
+# Restart=always
+# LimitNOFILE=65536
+# LimitNPROC=4096
+# TimeoutStartSec=5
+#
+# [Install]
+# WantedBy=multi-user.target
+
+# 9. Start and enable SonarQube service
+sudo systemctl daemon-reload                  # Reload systemd after adding service
+sudo systemctl enable sonarqube               # Enable SonarQube service to start on boot
+sudo systemctl start sonarqube                # Start SonarQube service
+sudo systemctl status sonarqube               # Check service status
+
+# 10. Verify SonarQube is listening on port 9000
+sudo ss -tulpn | grep 9000                    # Should show LISTEN on 9000
+
+# 11. Optional: Open port in firewall (if using UFW)
+sudo ufw allow 9000/tcp
+sudo ufw status
+
+# 12. Access SonarQube in browser
+# URL: http://<EC2_PUBLIC_IP>:9000
+# Default login: admin / admin

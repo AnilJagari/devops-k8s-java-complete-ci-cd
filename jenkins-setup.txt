@@ -1,0 +1,74 @@
+============================================================= Install and Configure the Jenkins-Master & Jenkins-Agent =============================================================
+
+## Set Hostname (Optional)
+$ sudo apt update
+$ sudo apt upgrade -y
+$ sudo nano /etc/hostname
+$ sudo init 6
+
+============================================================= Install Java =============================================================
+$ sudo apt update
+$ sudo apt upgrade -y
+$ sudo apt install openjdk-17-jre -y
+$ java -version
+
+============================================================= Install Jenkins =============================================================
+# Add Jenkins repo & key
+$ curl -fsSL https://pkg.jenkins.io/debian/jenkins.io-2023.key | sudo tee /usr/share/keyrings/jenkins-keyring.asc > /dev/null
+$ echo deb [signed-by=/usr/share/keyrings/jenkins-keyring.asc] https://pkg.jenkins.io/debian binary/ | sudo tee /etc/apt/sources.list.d/jenkins.list > /dev/null
+
+# Install Jenkins
+$ sudo apt-get update
+$ sudo apt-get install jenkins -y
+
+# Start Jenkins service
+$ sudo systemctl enable jenkins
+$ sudo systemctl start jenkins
+$ sudo systemctl status jenkins
+
+============================================================= Configure SSH for Jenkins Master =============================================================
+$ sudo nano /etc/ssh/sshd_config
+$ sudo service sshd reload
+
+# Generate SSH key for Jenkins master
+$ ssh-keygen
+$ cd ~/.ssh
+$ cat id_rsa.pub
+
+============================================================= Configure Jenkins Agent Node =============================================================
+
+## ON AGENT MACHINE:
+$ sudo apt update
+$ sudo apt upgrade -y
+
+# Install Java on agent
+$ sudo apt install openjdk-17-jre -y
+$ java -version
+
+# Create Jenkins user
+$ sudo useradd -m -s /bin/bash jenkins
+$ sudo passwd jenkins
+$ sudo usermod -aG sudo jenkins
+
+# Configure SSH on agent
+$ sudo nano /etc/ssh/sshd_config
+$ sudo service ssh reload
+
+# Switch to Jenkins user
+$ su - jenkins
+
+# Create .ssh folder and insert master’s public key
+$ mkdir -p ~/.ssh
+$ chmod 700 ~/.ssh
+$ nano ~/.ssh/authorized_keys
+$ chmod 600 ~/.ssh/authorized_keys
+
+============================================================= Connect Master to Agent =============================================================
+
+## ON MASTER: Test SSH login
+$ ssh jenkins@<AGENT_PRIVATE_IP>
+
+## ON AGENT: Download agent JAR during node connection
+$ java -jar agent.jar -jnlpUrl <AGENT_NODE_JNLP_URL> -secret <SECRET> -workDir "/home/jenkins"
+
+=========================================================================================================================================================
