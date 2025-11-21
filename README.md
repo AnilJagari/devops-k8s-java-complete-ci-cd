@@ -101,5 +101,20 @@ Argo CD is used for **continuous delivery**, enabling automatic deployment to Ku
 
 ---
 
-# 📁 Repository Structure
+# 🟪 6. Monitoring with Prometheus & Grafana
+
+Prometheus and Grafana are used to monitor the Kubernetes cluster, application performance, and resource usage.
+
+### ✔ What This Module Covers
+
+- Installing Prometheus on Kubernetes  
+- Installing Grafana on Kubernetes  
+- Exposing Grafana dashboard  
+- Adding Prometheus as a data source in Grafana  
+- Creating dashboards to monitor pods, nodes, deployments, and cluster health  
+
+📄 *(prometheus-grafana-setup.txt Coming Soon)*  
+> This will contain all commands for installing and configuring Prometheus & Grafana on Kubernetes.
+
+
 
